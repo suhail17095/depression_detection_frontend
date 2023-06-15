@@ -13,7 +13,7 @@ function Home(props) {
         let Form=new FormData(form);
         Form.append("profession",document.getElementById("exampleFormControlSelect3").value)
         Form.append("maritial_status",document.getElementById("exampleFormControlSelect4").value)
-        axios.post("/predict",[...Form.values()]).then(response=>
+        axios.post("https://depression-detection-api.onrender.com/predict",[...Form.values()]).then(response=>
             {
                 set_prediction(response.data.prediction)
                 if(prediction == 1)

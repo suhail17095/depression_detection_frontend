@@ -7,7 +7,7 @@ function Second(props) {
     const handleClick = ((e) => {
         e.preventDefault();
         let textarea = document.getElementById("exampleFormControlTextarea1");
-        axios.post("/tweet", {
+        axios.post("https://depression-detection-api.onrender.com/tweet", {
             message: textarea.value
         }).then(response => {
             let depress=response.data.depress
