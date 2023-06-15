@@ -64,7 +64,8 @@ function About() {
               </div>
               <div className="col-md-10">
                 <p>You can read more about us, by following the link below</p>
-                <button className='btn btn-primary'>Follow Link</button>
+                
+                <a href="https://www.ijraset.com/best-journal/depression-detection-and-analysis-using-ml"><button className='btn btn-primary'>Follow Link</button></a>
               </div>
             </div>
           </div>
