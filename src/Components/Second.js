@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from "axios"
 import { useState } from 'react';
-
+import Spinner from './Spinner';
  
 function Second(props) {
+    const [flag,setFlag]=useState(false)
     const handleClick = ((e) => {
         e.preventDefault();
         let textarea = document.getElementById("exampleFormControlTextarea1");
+        setFlag(true)
         axios.post("https://depression-detection-api.onrender.com/tweet", {
             message: textarea.value
         }).then(response => {
@@ -19,10 +21,12 @@ function Second(props) {
             setNegative(depress_per)
             console.log(response.data)
         })
+        setFlag(false)
     }
     )
     let [positive,setPositive]=useState(0)
     let [negative,setNegative]=useState(0)
+
 
     return (
         <div className="container my-5">
@@ -54,7 +58,12 @@ function Second(props) {
                     </div>
                 </div>
             </div>
+            <div className='row justify-content-center mt-3'>
+            {flag && <Spinner/>}
         </div>
+
+        </div>
+        
     )
 }
 

@@ -4,15 +4,17 @@ import axios from 'axios'
 import ShowResult from "./ShowResult"
 import depress_img from "./../Images/depressed.jpg"
 import nondepress_img from "./../Images/nonDepressed.jpg"
+import Spinner from './Spinner'
 
 function Home(props) {
-
+    const [flag,setFlag]=useState(false)
     const handleClick = ((e) => {
         e.preventDefault();
         let form=document.getElementById("my-form");
         let Form=new FormData(form);
         Form.append("profession",document.getElementById("exampleFormControlSelect3").value)
         Form.append("maritial_status",document.getElementById("exampleFormControlSelect4").value)
+        setFlag(true)
         axios.post("https://depression-detection-api.onrender.com/predict",[...Form.values()]).then(response=>
             {
                 set_prediction(response.data.prediction)
@@ -38,6 +40,7 @@ function Home(props) {
                         }
                     )
                 }
+                setFlag(false)
                 document.body.scrollIntoView(false);
                 console.log(response.data.prediction)
             })
@@ -274,8 +277,13 @@ function Home(props) {
                         </form>
                     </div>
                 </div>
+                
             </div>
+                <div className='row justify-content-center mt-5'>
+                {flag && <Spinner/>}
+                </div>
             <div className='row justify-content-center' style={{borderWidth:"0" }} >
+                
                 <div className="col-md-4 justify-content-center card my-5">
             {prediction && <ShowResult message={Results.message} link={Results.link} img={Results.img} title={Results.title}/>}
             </div>
